@@ -1,0 +1,14 @@
+{
+  "name": "composer-api-tests",
+  "version": "1.0.0",
+  "description": "a test suite using frisby.js for testing the composer api",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine-node spec"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "frisby": "^0.8.5"
+  }
+}
