@@ -1,5 +1,9 @@
 var frisby = require('frisby');
 
+frisby.globalSetup({ 
+  timeout: 1000000
+});
+
 var apiUrl = 'http://opendataqa.arcgis.com/';
 var how_many = 100;
 var datasetId;
@@ -39,7 +43,7 @@ frisby.create('Get Open Data search results')
     arcgis_online_item_url: String,
     description: String,
     extent: { coordinates: Array },
-    fields: Object,
+    fields: Array,
     id: String,
     item_name: String,
     type: String,
@@ -55,10 +59,26 @@ frisby.create('Get Open Data search results')
       .get(apiUrl + 'datasets/' + datasetId + '.json')
       .expectStatus(200)
       .expectHeaderContains('content-type', 'application/json')
-      // .expectJSONTypes({
-      //   data: Array,
-      //   metadata: Object
-      // })
+      .expectJSONTypes({
+        data: {
+          //object_id_field: String,
+          //display_field: String,
+          //max_record_count: Number,
+          record_count: Number,
+          //geometry_type: String,
+          arcgis_online_item_url: String,
+          description: String,
+          extent: { coordinates: Array },
+          fields: Array,
+          id: String,
+          item_name: String,
+          type: String,
+          item_type: String,
+          name: String,
+          url: String,
+          current_version: Number
+        }
+      })
     .toss();
   })
 .toss();
