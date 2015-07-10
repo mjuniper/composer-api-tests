@@ -5,7 +5,8 @@ frisby.globalSetup({
 });
 
 var apiUrl = 'http://opendataqa.arcgis.com/';
-var how_many = 100;
+var per_page = 100;
+var page = 1;
 var datasetId;
 
 var datasetSpec = {
@@ -14,7 +15,7 @@ var datasetSpec = {
   //max_record_count: Number,
   record_count: Number,
   //geometry_type: String,
-  arcgis_online_item_url: String,
+  landing_page: String,
   description: String,
   extent: { coordinates: Array },
   fields: Array,
@@ -28,7 +29,7 @@ var datasetSpec = {
 };
 
 frisby.create('Get Open Data search results')
-  .get(apiUrl + 'datasets.json?per_page=' + how_many)
+  .get(apiUrl + 'datasets.json?per_page=' + per_page + '&page=' + page)
   .expectStatus(200)
   .expectHeaderContains('content-type', 'application/json')
   .expectJSONTypes({
